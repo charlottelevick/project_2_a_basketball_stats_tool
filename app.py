@@ -1,9 +1,9 @@
 from constants import TEAMS
 from constants import PLAYERS
 
-def clean_data(data):
+def clean_data(player_list):
     cleaned = []
-    for player in data:
+    for player in player_list:
         fixed = {}
         fixed["name"] = player["name"]
         
@@ -23,5 +23,11 @@ def clean_data(data):
             fixed["experience"] = False
         cleaned.append(fixed)
     return cleaned
+
+def balance_teams(player_list, teams):
+    NUM_PLAYERS_TEAM = len(player_list) / len(teams)
+    print(int(NUM_PLAYERS_TEAM))
+    
+balance_teams(PLAYERS, TEAMS)
     
 print(clean_data(PLAYERS))
