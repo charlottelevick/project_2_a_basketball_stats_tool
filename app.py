@@ -20,10 +20,20 @@ def clean_data(player_list):
         cleaned.append(fixed)
     return cleaned
 
-def balance_teams(player_list, teams):
-    NUM_PLAYERS_TEAM = len(player_list) / len(teams)
-    print(int(NUM_PLAYERS_TEAM))
     
-balance_teams(PLAYERS, TEAMS)
+n = len(PLAYERS)
+split_size = n // 3
+team1 = PLAYERS[0:split_size]
+team2 = PLAYERS[split_size:2*split_size]
+team3 = PLAYERS[2*split_size:]
+print(f'Panthers: {team1}\n')
+print(f'Bandits : {team2}\n')
+print(f'Warriors : {team3}\n')
+
+#def balance_teams(player_list, teams):
+    #NUM_PLAYERS_TEAM = len(player_list) / len(teams)
+    #print(int(NUM_PLAYERS_TEAM))
     
-print(clean_data(PLAYERS))
+#balance_teams = []
+    
+#print(clean_data(PLAYERS))
