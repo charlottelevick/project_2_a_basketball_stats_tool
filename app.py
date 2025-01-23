@@ -22,19 +22,20 @@ def clean_data(player_list):
     return cleaned
 
 n = len(PLAYERS)
-split_size = n // 3
+split_size = n // len(TEAMS)
 team1 = PLAYERS[0:split_size]
 team2 = PLAYERS[split_size:2*split_size]
 team3 = PLAYERS[2*split_size:]
-#print(f'Panthers: {team1}\n')
-#print(f'Bandits : {team2}\n')
-#print(f'Warriors : {team3}\n')
 
 user_choice = input("BASKETBALL TEAM STATS TOOL\n\n----MENU----\n\nHere are your choices:\nA) Display Team Stats\nB) Quit\n")
 if user_choice.upper() == "A":
-    user_option = input("Enter an option:\nA) Panthers\nB) Bandits\nC) Warriors\n")
+    user_option = input("\nEnter an option:\nA) Panthers\nB) Bandits\nC) Warriors\n")
     if user_option.upper() == "A":
-        print(f"Team: Panther's Stats\n--------------\nTotal players: {}\nTotal experienced: ?\nTotal inexperienced: \nAverage height: ?\nPlayers on Team: ?\nGuardians: ?\nPress ENTER to continue...")
+        print(f"\nTeam: Panther's Stats\n--------------\nTotal players: {len(team1)}\nTotal experienced: ?\nTotal inexperienced: \nAverage height: ?\nPlayers on Team: ?\nGuardians: ?\n\nPress ENTER to continue...")
+    elif user_option.upper() == "B":
+        print(f"\nTeam: Bandit's Stats\n--------------\nTotal players: {len(team2)}\nTotal experienced: ?\nTotal inexperienced: \nAverage height: ?\nPlayers on Team: ?\nGuardians: ?\n\nPress ENTER to continue...")
+    elif user_option.upper() == "C":
+        print(f"\nTeam: Warrior's Stats\n--------------\nTotal players: {len(team3)}\nTotal experienced: ?\nTotal inexperienced: \nAverage height: ?\nPlayers on Team: ?\nGuardians: ?\n\nPress ENTER to continue...")
 elif user_choice.upper() == "B":
     sys.exit()
 else:
