@@ -27,16 +27,25 @@ team1 = PLAYERS[0:split_size]
 team2 = PLAYERS[split_size:2*split_size]
 team3 = PLAYERS[2*split_size:]
 
-user_choice = input("BASKETBALL TEAM STATS TOOL\n\n----MENU----\n\nHere are your choices:\nA) Display Team Stats\nB) Quit\n")
-if user_choice.upper() == "A":
-    user_option = input("\nEnter an option:\nA) Panthers\nB) Bandits\nC) Warriors\n")
-    if user_option.upper() == "A":
-        print(f"\nTeam: Panther's Stats\n--------------\nTotal players: {len(team1)}\nTotal experienced: ?\nTotal inexperienced: \nAverage height: ?\nPlayers on Team: ?\nGuardians: ?\n\nPress ENTER to continue...")
-    elif user_option.upper() == "B":
-        print(f"\nTeam: Bandit's Stats\n--------------\nTotal players: {len(team2)}\nTotal experienced: ?\nTotal inexperienced: \nAverage height: ?\nPlayers on Team: ?\nGuardians: ?\n\nPress ENTER to continue...")
-    elif user_option.upper() == "C":
-        print(f"\nTeam: Warrior's Stats\n--------------\nTotal players: {len(team3)}\nTotal experienced: ?\nTotal inexperienced: \nAverage height: ?\nPlayers on Team: ?\nGuardians: ?\n\nPress ENTER to continue...")
-elif user_choice.upper() == "B":
-    sys.exit()
-else:
-    print("Please try again")
+def start_game():
+    user_choice = input("BASKETBALL TEAM STATS TOOL\n\n----MENU----\n\nHere are your choices:\nA) Display Team Stats\nB) Quit\n")
+    if user_choice.upper() == "A":
+        user_option = input("\nEnter an option:\nA) Panthers\nB) Bandits\nC) Warriors\n")
+        if user_option.upper() == "A":
+            print(f"\nTeam: Panther's Stats\n--------------\nTotal players: {len(team1)}\nTotal experienced: ?\nTotal inexperienced: \nAverage height: ?\nPlayers on Team: ?\nGuardians: ?")
+            input("\nPress ENTER to continue...\n")
+            start_game()
+        elif user_option.upper() == "B":
+            print(f"\nTeam: Bandit's Stats\n--------------\nTotal players: {len(team2)}\nTotal experienced: ?\nTotal inexperienced: \nAverage height: ?\nPlayers on Team: ?\nGuardians: ?")
+            input("\nPress ENTER to continue...\n")
+            start_game()
+        elif user_option.upper() == "C":
+            print(f"\nTeam: Warrior's Stats\n--------------\nTotal players: {len(team3)}\nTotal experienced: ?\nTotal inexperienced: \nAverage height: ?\nPlayers on Team: ?\nGuardians: ?")
+            input("\nPress ENTER to continue...\n")
+            start_game()
+    elif user_choice.upper() == "B":
+        sys.exit()
+    else:
+        print("Please try again")
+
+start_game()
