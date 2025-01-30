@@ -60,31 +60,37 @@ def average_player_heights(team):
     return average_height
 
 def players_on_teams(team):
+    sorted_team_list = sorted(team, key=lambda d: d["height"])
     player_names = []
-    for player in team:
+    for player in sorted_team_list:
         name = player["name"]
         player_names.append(name)
-    player_names_list = name.split()
-    return player_names_list
+    joined_player_names = ", ".join(player_names)
+    return joined_player_names
 
-team1_player_names = players_on_teams(team1)
-team2_player_names = players_on_teams(team2)
-team3_player_names = players_on_teams(team3)
-
+def guardians_on_teams(team):
+    guardian_names = []
+    for player in team:
+        guardians = player["guardians"]
+        for guardian in guardians:
+            guardian_names.append(guardian)
+    joined_guardian_names = ", ".join(guardian_names)
+    return joined_guardian_names
+    
 def start_stats_tool():
     user_choice = input("BASKETBALL TEAM STATS TOOL\n\n----MENU----\n\nHere are your choices:\nA) Display Team Stats\nB) Quit\n")
     if user_choice.upper() == "A":
         user_option = input("\nEnter an option:\nA) Panthers\nB) Bandits\nC) Warriors\n")
         if user_option.upper() == "A":
-            print(f"\nTeam: Panther's Stats\n-----------------\nTotal players: {len(team1)}\nTotal experienced: {len(team1_experienced_players)}\nTotal inexperienced: {len(team1_inexperienced_players)}\nAverage height: {round(average_player_heights(team1))}\nPlayers on Team: {players_on_teams(team1)}\nGuardians: ?")
+            print(f"\nTeam: Panther's Stats\n--------------------\nTotal players: {len(team1)}\nTotal experienced: {len(team1_experienced_players)}\nTotal inexperienced: {len(team1_inexperienced_players)}\nAverage height: {round(average_player_heights(team1),1)}\nPlayers on Team: {players_on_teams(team1)}\nGuardians: {guardians_on_teams(team1)}")
             input("\nPress ENTER to continue...\n")
             start_stats_tool()
         elif user_option.upper() == "B":
-            print(f"\nTeam: Bandit's Stats\n------------------\nTotal players: {len(team2)}\nTotal experienced: {len(team2_experienced_players)}\nTotal inexperienced: {len(team2_inexperienced_players)}\nAverage height: {round(average_player_heights(team2))}\nPlayers on Team: {players_on_teams(team2)}\nGuardians: ?")
+            print(f"\nTeam: Bandit's Stats\n---------------------\nTotal players: {len(team2)}\nTotal experienced: {len(team2_experienced_players)}\nTotal inexperienced: {len(team2_inexperienced_players)}\nAverage height: {round(average_player_heights(team2),1)}\nPlayers on Team: {players_on_teams(team2)}\nGuardians: {guardians_on_teams(team2)}")
             input("\nPress ENTER to continue...\n")
             start_stats_tool()
         elif user_option.upper() == "C":
-            print(f"\nTeam: Warrior's Stats\n-----------------\nTotal players: {len(team3)}\nTotal experienced: {len(team3_experienced_players)}\nTotal inexperienced: {len(team3_inexperienced_players)}\nAverage height: {round(average_player_heights(team3))}\nPlayers on Team: {players_on_teams(team3)}\nGuardians: ?")
+            print(f"\nTeam: Warrior's Stats\n--------------------\nTotal players: {len(team3)}\nTotal experienced: {len(team3_experienced_players)}\nTotal inexperienced: {len(team3_inexperienced_players)}\nAverage height: {round(average_player_heights(team3),1)}\nPlayers on Team: {players_on_teams(team3)}\nGuardians: {guardians_on_teams(team3)}")
             input("\nPress ENTER to continue...\n")
             start_stats_tool()
     elif user_choice.upper() == "B":
