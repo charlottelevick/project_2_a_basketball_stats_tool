@@ -1,5 +1,4 @@
 from constants import TEAMS, PLAYERS
-import sys
 
 def clean_data(player_list):
     cleaned = []
@@ -94,7 +93,7 @@ def start_stats_tool():
             input("\nPress ENTER to continue...\n")
             start_stats_tool()
     elif user_choice.upper() == "B":
-        sys.exit()
+        exit()
     else:
         print("Please try again")
         start_stats_tool()
