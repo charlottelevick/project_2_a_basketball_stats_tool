@@ -43,53 +43,9 @@ inexp_per_team = len(inexperienced_players) // num_teams
 
 # Create a dictionary which has a key for each team
 # and each value is an empty list
-teams_assignment = {team: [] for team in TEAMS}
+teams_assignment = {team: {"players": [], "experience": 0, "inexperience": 0, "avg_height": 0} for team in TEAMS}
 
-# Loop over each team
-for team in TEAMS:
-    # Loop over each experienced player
-    # and append the player to the current team being looped over
-    for _ in range(exp_per_team):
-        player = experienced_players.pop()
-        teams_assignment[team].append(player)
-# Loop over each team
-for team in TEAMS:
-    # Loop over each inexperienced player
-    # and append the player to the current team being looped over
-    for _ in range(inexp_per_team):
-        player = inexperienced_players.pop()
-        teams_assignment[team].append(player)
-        
-# Assign each team to its corresponding variable 
-team1 = teams_assignment[TEAMS[0]]
-team2 = teams_assignment[TEAMS[1]]
-team3 = teams_assignment[TEAMS[2]]
-
-# Function that returns a list of experienced players
-def get_experienced_players(team):
-    experienced_players = []
-    for player in team:
-        if player["experience"] == True:
-            experienced_players.append(player)
-    return experienced_players
-
-# Get list of experienced players from each team and assign them to corresponding variables
-team1_experienced_players = get_experienced_players(team1)
-team2_experienced_players = get_experienced_players(team2)
-team3_experienced_players = get_experienced_players(team3)
-
-# Function that returns a list of inexperienced players
-def get_inexperienced_players(team):
-    inexperienced_players = []
-    for player in team:
-        if player["experience"] == False:
-            inexperienced_players.append(player)
-    return inexperienced_players
-
-# Get list of inexperienced players from each team and assign them to corresponding variables
-team1_inexperienced_players = get_inexperienced_players(team1)
-team2_inexperienced_players = get_inexperienced_players(team2)
-team3_inexperienced_players = get_inexperienced_players(team3)
+print(teams_assignment)
 
 # Calculate the average height of a team
 def average_player_heights(team):
@@ -98,7 +54,33 @@ def average_player_heights(team):
         height = player["height"] 
         player_heights.append(height)  
     average_height = sum(player_heights) / len(player_heights)
-    return average_height
+    return round(average_height,1)
+
+# Loop over each team
+for team in TEAMS:
+    # Loop over each experienced player
+    # and append the player to the current team being looped over
+    for _ in range(exp_per_team):
+        player = experienced_players.pop()
+        teams_assignment[team]["players"].append(player)
+        teams_assignment[team]["experience"] += 1
+        
+# Loop over each team
+for team in TEAMS:
+    # Loop over each inexperienced player
+    # and append the player to the current team being looped over
+    for _ in range(inexp_per_team):
+        player = inexperienced_players.pop()
+        teams_assignment[team]["players"].append(player)
+        teams_assignment[team]["inexperience"] += 1
+        
+    # Calculate average height of current team being looped
+    teams_assignment[team]["avg_height"] = average_player_heights(teams_assignment[team]["players"])
+        
+# Assign each team to its corresponding variable 
+team1 = teams_assignment[TEAMS[0]]
+team2 = teams_assignment[TEAMS[1]]
+team3 = teams_assignment[TEAMS[2]]
 
 # Return list of players ordered by height
 def players_on_teams(team):
@@ -126,15 +108,15 @@ def start_stats_tool():
     if user_choice.upper() == "A":
         user_option = input("\nEnter an option:\nA) Panthers\nB) Bandits\nC) Warriors\n")
         if user_option.upper() == "A":
-            print(f"\nTeam: Panther's Stats\n--------------------\nTotal players: {len(team1)}\nTotal experienced: {len(team1_experienced_players)}\nTotal inexperienced: {len(team1_inexperienced_players)}\nAverage height: {round(average_player_heights(team1),1)}\nPlayers on Team: {players_on_teams(team1)}\nGuardians: {guardians_on_teams(team1)}")
+            print(f"\nTeam: Panther's Stats\n--------------------\nTotal players: {len(team1["players"])}\nTotal experienced: {team1["experience"]}\nTotal inexperienced: {team1["inexperience"]}\nAverage height: {team1["avg_height"]}\nPlayers on Team: {players_on_teams(team1["players"])}\nGuardians: {guardians_on_teams(team1["players"])}")
             input("\nPress ENTER to continue...\n")
             start_stats_tool()
         elif user_option.upper() == "B":
-            print(f"\nTeam: Bandit's Stats\n---------------------\nTotal players: {len(team2)}\nTotal experienced: {len(team2_experienced_players)}\nTotal inexperienced: {len(team2_inexperienced_players)}\nAverage height: {round(average_player_heights(team2),1)}\nPlayers on Team: {players_on_teams(team2)}\nGuardians: {guardians_on_teams(team2)}")
+            print(f"\nTeam: Bandit's Stats\n---------------------\nTotal players: {len(team2["players"])}\nTotal experienced: {team2["experience"]}\nTotal inexperienced: {team2["inexperience"]}\nAverage height: {team2["avg_height"]}\nPlayers on Team: {players_on_teams(team2["players"])}\nGuardians: {guardians_on_teams(team2["players"])}")
             input("\nPress ENTER to continue...\n")
             start_stats_tool()
         elif user_option.upper() == "C":
-            print(f"\nTeam: Warrior's Stats\n--------------------\nTotal players: {len(team3)}\nTotal experienced: {len(team3_experienced_players)}\nTotal inexperienced: {len(team3_inexperienced_players)}\nAverage height: {round(average_player_heights(team3),1)}\nPlayers on Team: {players_on_teams(team3)}\nGuardians: {guardians_on_teams(team3)}")
+            print(f"\nTeam: Warrior's Stats\n--------------------\nTotal players: {len(team3["players"])}\nTotal experienced: {team3["experience"]}\nTotal inexperienced: {team3["inexperience"]}\nAverage height: {team3["avg_height"]}\nPlayers on Team: {players_on_teams(team3["players"])}\nGuardians: {guardians_on_teams(team3["players"])}")
             input("\nPress ENTER to continue...\n")
             start_stats_tool()
         else:
